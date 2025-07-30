@@ -1,107 +1,55 @@
-import React, { useState } from "react";
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 import {
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-  StatusBar,
-} from "react-native";
+  Ionicons,
+  FontAwesome,
+  MaterialIcons,
+  AntDesign,
+  Entypo,
+  Feather,
+  MaterialCommunityIcons,
+  Octicons,
+  Foundation,
+  SimpleLineIcons,
+} from "@expo/vector-icons";
 
-// Gambar primer
-const mainImages = [
-  require("../assets/images/1.jpg"),
-  require("../assets/images/2.jpg"),
-  require("../assets/images/3.jpg"),
-  require("../assets/images/4.jpg"),
-  require("../assets/images/5.jpg"),
-  require("../assets/images/6.jpg"),
-  require("../assets/images/7.jpg"),
-  require("../assets/images/8.jpg"),
-  require("../assets/images/9.jpg"),
-];
-
-// Gambar alternatif
-const altImages = [
-  require("../assets/images/a1.jpg"),
-  require("../assets/images/a2.jpg"),
-  require("../assets/images/a3.jpg"),
-  require("../assets/images/a4.jpg"),
-  require("../assets/images/a5.jpg"),
-  require("../assets/images/a6.jpg"),
-  require("../assets/images/a7.jpg"),
-  require("../assets/images/a8.jpg"),
-  require("../assets/images/a9.jpg"),
-];
-
-export default function HomeScreen() {
-  const [states, setStates] = useState(
-    Array(9).fill(0).map(() => ({ isAlt: false, scale: 1 }))
-  );
-
-  const handlePress = (index: number) => {
-    setStates((prevStates) =>
-      prevStates.map((state, i) => {
-        if (i !== index) return state;
-        if (state.scale >= 2) return state;
-        const newScale = Math.min(state.scale * 1.2, 2);
-        return {
-          isAlt: !state.isAlt,
-          scale: newScale,
-        };
-      })
-    );
-  };
-
+export default function IconScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <StatusBar hidden />
-      <View style={styles.grid}>
-        {mainImages.map((image, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handlePress(index)}
-            style={styles.cell}
-            activeOpacity={0.8}
-          >
-            <Image
-              source={states[index].isAlt ? altImages[index] : image}
-              style={[
-                styles.image,
-                { transform: [{ scale: states[index].scale }] },
-              ]}
-            />
-          </TouchableOpacity>
-        ))}
+    <View style={styles.container}>
+      <Text style={styles.title}>MUH FADHIL AHMAD</Text>
+      <View style={styles.iconGrid}>
+        <Ionicons name="home" size={40} color="#3b82f6" />
+        <FontAwesome name="car" size={40} color="#ef4444" />
+        <MaterialIcons name="flight" size={40} color="#10b981" />
+        <AntDesign name="github" size={40} color="#8b5cf6" />
+        <Entypo name="rocket" size={40} color="#f59e0b" />
+        <Feather name="camera" size={40} color="#14b8a6" />
+        <MaterialCommunityIcons name="robot" size={40} color="#f43f5e" />
+        <Octicons name="zap" size={40} color="#6366f1" />
+        <Foundation name="heart" size={40} color="#ef4444" />
+        <SimpleLineIcons name="ghost" size={40} color="#6b7280" />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#fff",
     padding: 20,
   },
-  grid: {
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  iconGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
-  },
-  cell: {
-    width: 110,
-    height: 110,
-    margin: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#eee",
-    borderRadius: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 10,
+    gap: 20,
   },
 });
